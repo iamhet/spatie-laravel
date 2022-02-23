@@ -2,8 +2,7 @@
 
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
+    <div class="container">
         <div class="pull-left">
             <h2> Show User</h2>
         </div>
@@ -11,10 +10,9 @@
             <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
         </div>
     </div>
-</div>
+</br>
 
-
-<div class="row">
+<div class="container">
         <div class="form-group">
             <label for="exampleInputEmail1" class="form-label">Name :-</label>
             {{ $user->name }}

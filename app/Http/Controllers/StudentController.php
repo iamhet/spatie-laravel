@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\student_detail;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
 
 class StudentController extends Controller
 {
@@ -15,7 +16,7 @@ class StudentController extends Controller
     public function index()
     {
         $student = student_detail::all();
-        return view('student.index',compact('student'));
+        return view('student.index', compact('student'));
     }
 
     /**
@@ -36,9 +37,9 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-    
+
         student_detail::create($request->all());
-    
+
         return redirect()->route('student.index');
     }
 
@@ -50,7 +51,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = student_detail::find($id);
+        return view('student.show', compact('student'));
     }
 
     /**
@@ -59,9 +61,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(student_detail $student)
     {
-        //
+        return view('student.edit',compact('student'));
     }
 
     /**
@@ -71,9 +73,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, student_detail $student)
     {
-        //
+        $student->update($request->all());
+        return redirect()->route('user.index');
     }
 
     /**
@@ -82,8 +85,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(student_detail $student)
     {
-        //
+        $student->delete();
+    
+        return redirect()->route('student.index');
     }
 }
