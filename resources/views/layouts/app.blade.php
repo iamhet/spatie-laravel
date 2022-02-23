@@ -48,7 +48,7 @@
                         <a class="navbar-brand" href="{{ route('users.index') }}">
                             Manage User
                         </a>
-                        <a class="navbar-brand" href="{{ url('/') }}">
+                        <a class="navbar-brand" href="{{ route('student.index') }}">
                             Manage Role
                         </a>
                         <a class="navbar-brand" href="{{ url('/') }}">

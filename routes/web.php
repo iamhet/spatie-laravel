@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -36,4 +36,4 @@ Route::get('/delete/{id}', [action::class, 'destroy']);
 
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
-Route::resource('products', StudentController::class);
+Route::resource('student', StudentController::class);
