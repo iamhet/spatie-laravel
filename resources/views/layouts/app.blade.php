@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html >
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -45,6 +45,15 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <a class="navbar-brand" href="{{ route('users.index') }}">
+                            Manage User
+                        </a>
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            Manage Role
+                        </a>
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            Manage Student
+                        </a>
                         @can('add student')
                         <div class="w-full">
                             <a href="create"><button type="button" class="btn btn-success ms-5">Add Student</button></a>

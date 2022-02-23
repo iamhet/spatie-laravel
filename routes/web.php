@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\action;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +25,15 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/create',[action::class,'create']);
-Route::post('/add',[action::class,'operationCreate']);
-Route::get('/edit/{id}',[action::class,'edit']);
-Route::post('/update',[action::class,'update']);
-Route::get('/delete/{id}',[action::class,'destroy']);
+
+
+Route::get('/create', [action::class, 'create']);
+Route::post('/add', [action::class, 'operationCreate']);
+Route::get('/edit/{id}', [action::class, 'edit']);
+Route::post('/update', [action::class, 'update']);
+Route::get('/delete/{id}', [action::class, 'destroy']);
+
+
+Route::resource('roles', RoleController::class);
+Route::resource('users', UserController::class);
+Route::resource('products', StudentController::class);
