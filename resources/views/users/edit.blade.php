@@ -2,57 +2,49 @@
 
 
 @section('content')
-
     <div class="container">
         <div class="pull-left">
-            <h2>Edit New User</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+            <h1>Edit New User</h1>
         </div>
     </div>
-
-
-
-
-
-{!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+    {!! Form::open(['route' => ['users.update', $user->id], 'method' => 'PATCH']) !!}
+    {{-- {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!} --}}
 
     <div class="container">
         <div class="form-group">
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+            <label for="exampleInputEmail1" class="form-label">Name:</label>
+            {!! Form::text('name', $user->name, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
         </div>
     </div>
     <div class="container">
         <div class="form-group">
-            <strong>Email:</strong>
-            {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+            <label for="exampleInputEmail1" class="form-label">Email:</label>
+            {!! Form::text('email', $user->email, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
         </div>
     </div>
     <div class="container">
         <div class="form-group">
-            <strong>Password:</strong>
-            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
+            <label for="exampleInputEmail1" class="form-label">Password:</label>
+            {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
         </div>
     </div>
     <div class="container">
         <div class="form-group">
-            <strong>Confirm Password:</strong>
-            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
+            <label for="exampleInputEmail1" class="form-label">Confirm Password:</label>
+            {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
         </div>
     </div>
     <div class="container">
         <div class="form-group">
-            <strong>Role:</strong>
-            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
+            <label for="exampleInputEmail1" class="form-label">Role:</label>
+            {!! Form::select('roles[]', $roles, $userRole, ['class' => 'form-control']) !!}
         </div>
     </div>
-</br>
+    </br>
     <div class="container">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        {!! Form::submit('Submit', ['class' => 'btn btn-sm btn-primary']) !!}
+
     </div>
 
-{!! Form::close() !!}
-
+    {!! Form::close() !!}
 @endsection

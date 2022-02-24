@@ -4,10 +4,7 @@
 @section('content')
     <div class="container">
         <div class="pull-left">
-            <h2> Show User</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+            <h1> Show User</h1>
         </div>
     </div>
 </br>
@@ -26,9 +23,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1" class="form-label">Role :-</label>
             @if(!empty($user->getRoleNames()))
-                @foreach($user->getRoleNames() as $v)
-                    <label class="badge badge-success">{{ $v }}</label>
-                @endforeach
+            {{ $user->getRoleNames() }}
             @endif
         </div>
   

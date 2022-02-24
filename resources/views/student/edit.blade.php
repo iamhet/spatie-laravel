@@ -1,34 +1,63 @@
 @extends('layouts.app')
-
-
 @section('content')
-        <div class="container">
-            <div class="pull-left">
-                <h2>Edit student</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
-            </div>
+    <div class="container">
+        <div class="pull-left">
+            <h1>Edit Student</h1>
         </div>
-        <div class="container">
-         <form action="{{ route('students.update',$student->id) }}" method="POST">
-    	@csrf
-        @method('PUT')
-		    <div class="container">
-		        <div class="form-group">
-		            <strong>Name:</strong>
-		            <input type="text" name="name" value="{{ $student->name }}" class="form-control" placeholder="Name">
-		        </div>
-		    </div>
-		    <div class="container">
-		        <div class="form-group">
-		            <strong>Marks:</strong>
-                    <input type="text" name="marks" value="{{ $student->marks }}" class="form-control" placeholder="Marks">
-		        </div>
-		    </div>
-		    <div class="container">
-		      <button type="submit" class="btn btn-primary">Submit</button>
-		    </div>
-    </form>
+    </div>
+    {!! Form::open(['route' => ['student.update', $student->id], 'method' => 'PATCH']) !!}
+    @csrf
+    <div class="container">
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label">Name:</label>
+            {!! Form::text('name', $student->name, array('placeholder' => 'Name','class' => 'form-control')) !!}
+		</div>
+    </div>
+    <div class="container">
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label">Marks:</label>
+			{!! Form::text('marks', $student->marks, array('placeholder' => 'Marks','class' => 'form-control')) !!}
+
         </div>
+    </div>
+    </br>
+    <div class="container">
+		{!!Form::submit('Submit',array('class' => 'btn btn-sm btn-primary'))!!}
+    </div>
+    {!! Form::close() !!}
 @endsection
+
+<script>
+    $(document).ready(function(){
+
+$(document).on("click", "#update_data", function() { 
+    var url = "{{URL('userData/'.$userData->id)}}";
+    var id= 
+    $.ajax({
+        url: url,
+        type: "PATCH",
+        cache: false,
+        data:{
+            _token:'{{ csrf_token() }}',
+            type: 3,
+            name: $('#name').val(),
+            email: $('#email').val(),
+            phone: $('#phone').val(),
+            city: $('#city').val()
+        },
+        success: function(dataResult){
+            dataResult = JSON.parse(dataResult);
+         if(dataResult.statusCode)
+         {
+            window.location = "/userData";
+         }
+         else{
+             alert("Internal Server Error");
+         }
+            
+        }
+    });
+}); 
+});
+
+</script>

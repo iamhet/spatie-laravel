@@ -4,11 +4,12 @@
 @section('content')
     <div class="container">
         <div class="pull-left">
-            <h2>Students</h2>
+            <h1>Students</h1>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('student.create') }}"> Create New Student</a>
-
+            @can('student_create')
+                <a class="btn btn-success btn-sm" href="{{ route('student.create') }}"> Create New Student</a>
+            @endcan
         </div>
     </div>
     </br>
@@ -26,16 +27,21 @@
                     <td>{{ $std->name }}</td>
                     <td>{{ $std->marks }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('student.show', $std->id) }}">Show</a>
-                        <a class="btn btn-primary" href="{{ route('student.edit', $std->id) }}">Edit</a>
-                        @csrf
-                        {!! Form::open(['method' => 'DELETE', 'route' => ['student.destroy', $std->id], 'style' => 'display:inline']) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                        {!! Form::close() !!}
-
+                        <a class="btn btn-primary btn-sm" href="{{ route('student.show', $std->id) }}">Show</a>
+                        @can('student_edit')
+                            <a class="btn btn-sm btn-primary" href="{{ route('student.edit', $std->id) }}">Edit</a>
+                        @endcan
+                        @can('student_delete')
+                            @csrf
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['student.destroy', $std->id], 'style' => 'display:inline']) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::close() !!}
+                        @endcan
                     </td>
                 </tr>
             @endforeach
+
         </table>
     </div>
+    
 @endsection

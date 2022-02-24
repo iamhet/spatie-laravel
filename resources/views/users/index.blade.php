@@ -4,10 +4,13 @@
 @section('content')
     <div class="container">
         <div class="pull-left">
-            <h2>Users Management</h2>
+            <h1>Users Management</h1>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+          {{-- @can('role_create') --}}
+          <a class="btn btn-sm btn-success" href="{{ route('users.create') }}"> Create New User</a>
+          {{-- @endcan --}}
+            
         </div>
     </div>
   </br>
@@ -17,23 +20,30 @@
    <th>Id</th>
    <th>Name</th>
    <th>Email</th>
-   <th>Roles</th>
+   <th>Roles</th> 
    <th width="280px">Action</th>
  </tr>
- @foreach ($data as $key => $user)
+ @foreach ($data as $k => $user)
   <tr>
     <td>{{ $user->id }}</td>
     <td>{{ $user->name }}</td>
     <td>{{ $user->email}}</td>
     <td>
-      Admin
+      @if(!empty($user->getRoleNames()))
+           <label>{{ $user->getRoleNames() }}</label>
+      @endif
     </td>
     <td>
-       <a class="btn btn-primary" href="{{ route('users.show',$user->id) }}">Show</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-       {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-       {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-       {!! Form::close() !!}
+       <a class="btn btn-primary btn-sm" href="{{ route('users.show',$user->id) }}">Show</a>
+       {{-- @can('role_edit') --}}
+       <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}">Edit</a>
+       {{-- @endcan --}}
+         {{-- @can('role_delete') --}}
+         {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+         {!! Form::close() !!}
+         {{-- @endcan --}}
+           
     </td>
   </tr>
  @endforeach

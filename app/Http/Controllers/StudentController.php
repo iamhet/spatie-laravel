@@ -1,13 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\student_detail;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
+    // function __construct()
+    // {
+    //      $this->middleware('permission:student-list|student-create|student-edit|student-delete', ['only' => ['index','show']]);
+    //      $this->middleware('permission:student-create', ['only' => ['create','store']]);
+    //      $this->middleware('permission:student-edit', ['only' => ['edit','update']]);
+    //      $this->middleware('permission:student-delete', ['only' => ['destroy']]);
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,7 @@ class StudentController extends Controller
     public function index()
     {
         $student = student_detail::all();
-        return view('student.index', compact('student'));
+        return view('student.index',compact('student'));
     }
 
     /**
@@ -37,9 +43,8 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-
+    
         student_detail::create($request->all());
-
         return redirect()->route('student.index');
     }
 
@@ -52,7 +57,7 @@ class StudentController extends Controller
     public function show($id)
     {
         $student = student_detail::find($id);
-        return view('student.show', compact('student'));
+        return view('student.show',compact('student'));
     }
 
     /**
@@ -61,8 +66,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(student_detail $student)
+    public function edit($id)
     {
+        $student = student_detail::find($id);
         return view('student.edit',compact('student'));
     }
 
@@ -73,10 +79,12 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, student_detail $student)
+    public function update(Request $request, $id)
     {
-        $student->update($request->all());
-        return redirect()->route('user.index');
+        $data = $request->all();
+        $student = student_detail::find($id);
+        $student->update($data);
+        return redirect()->route('student.index');
     }
 
     /**
@@ -85,10 +93,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(student_detail $student)
+    public function destroy($id)
     {
-        $student->delete();
-    
+        student_detail::find($id)->delete();
         return redirect()->route('student.index');
     }
 }

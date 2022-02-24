@@ -5,10 +5,7 @@
 <div class=" container   ">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New User</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+            <h1>Create New User</h1>
         </div>
     </div>
 </div>
@@ -38,7 +35,8 @@
     {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
   </div>
     </br>
-  <button type="submit" class="btn btn-primary">Submit</button>
+   {!!Form::submit('Submit',array('class' => 'btn btn-primary btn-sm'))!!}
+
 </div>
 {!! Form::close() !!}
 

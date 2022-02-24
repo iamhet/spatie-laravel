@@ -1,4 +1,4 @@
-<!doctype html >
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -40,24 +40,28 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @if (Auth::check())
+                        {{-- @can('role_create') --}}
+                        <a class="navbar-brand" href="{{ route('users.index') }}">
+                            Manage User
+                        </a>
+                            
+                        <a class="navbar-brand" href="{{ route('roles.index') }}">
+                            Manage Role
+                        </a>
+                        {{-- @endcan --}}
+                        <a class="navbar-brand" href="{{ route('student.index') }}">
+                            Manage Student
+                        </a> 
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <a class="navbar-brand" href="{{ route('users.index') }}">
-                            Manage User
-                        </a>
-                        <a class="navbar-brand" href="{{ route('student.index') }}">
-                            Manage Role
-                        </a>
-                        <a class="navbar-brand" href="{{ url('/') }}">
-                            Manage Student
-                        </a>
                         @can('add student')
-                        <div class="w-full">
-                            <a href="create"><button type="button" class="btn btn-success ms-5">Add Student</button></a>
-                        </div>
+                            <div class="w-full">
+                                <a href="create"><button type="button" class="btn btn-success ms-5">Add Student</button></a>
+                            </div>
                         @endcan
                         <!-- Authentication Links -->
                         @guest
@@ -81,7 +85,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

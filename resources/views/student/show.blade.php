@@ -4,14 +4,9 @@
 @section('content')
         <div class="container">
             <div class="pull-left">
-                <h2> Show Product</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('student.index') }}"> Back</a>
+                <h1> Show Student</h1>
             </div>
         </div>
-
-
         <div class="container">
             <div class="form-group">
                 <strong>Name:</strong>
@@ -20,7 +15,7 @@
         </div>
         <div class="container">
             <div class="form-group">
-                <strong>Marks:</strong>
+                <label for="exampleInputEmail1" class="form-label">Marks:</label>
                 {{ $student->marks }}
             </div>
         </div>
